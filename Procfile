@@ -1,1 +1,1 @@
-worker: python kic_bot.py.py
+worker: python kic_bot.py
