@@ -1,6 +1,5 @@
 import discord
 import datetime
-import random
 import openpyxl
 import asyncio
 import time
@@ -79,4 +78,4 @@ async def on_message(message):
             await client.send_message(client.get_channel(str(send_location)), message.content[3:])
         
 
-client.run('TOKEN')
+client.run(TOKEN)
