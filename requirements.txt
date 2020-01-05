@@ -1,0 +1,3 @@
+discord.py==0.16.12
+DateTime==4.3
+openpyxl==2.5.14
