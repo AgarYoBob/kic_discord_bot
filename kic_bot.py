@@ -79,4 +79,4 @@ async def on_message(message):
             await client.send_message(client.get_channel(str(send_location)), message.content[3:])
         
 
-client.run('NjYzMzcwMjIzODY4NzA2ODY3.XhHkvA.sdaMrPDirc2tQsoloelnUyMALVY')
+client.run('TOKEN')
