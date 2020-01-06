@@ -1,6 +1,7 @@
 import discord
 import datetime
 import openpyxl
+import random
 import asyncio
 import time
 
@@ -20,7 +21,7 @@ async def on_ready():
     #    send_text = input()
     #    await client.send_message(client.get_channel('181663429143035906'), send_text)
 
-    await client.change_presence(game=discord.Game(name='cafe.naver.com/iocommunity', type=2))
+    await client.change_presence(game=discord.Game(name='cafe.naver.com/iocommunity', type=1))
 
     
 async def command_log(message):
@@ -68,14 +69,19 @@ async def on_message(message):
             #await client.send_message(message.channel, message.content[7:])
 
         elif message.content.startswith('/c '): # /c set
-            send_location = str(message.content[3:])
-            await client.send_message(message.channel, '메시지 전송 위치가 <#' + send_location + '>(으)로 설정되었습니다.')
-            print(send_location)
+            file = openpyxl.load_workbook('kic_bot.xlsx')
+            sheet = file.active
+            sheet['H' + '2'].value = str(message.content[3:])
+            await client.send_message(message.channel, '메시지 전송 위치가 <#' + message.content[3:] + '>(으)로 설정되었습니다.')
+            file.save('kic_bot.xlsx')
 
         elif message.content.startswith('/r '):
-            print(send_location)
-            await client.send_message(message.channel, '메시지 ' + message.content[3:] + '(을)를 ' + send_location + '에 전송했습니다.')
-            await client.send_message(client.get_channel(str(send_location)), message.content[3:])
+            #print(send_location)
+            file = openpyxl.load_workbook('kic_bot.xlsx')
+            sheet = file.active
+            await client.send_message(message.channel, '메시지 ' + message.content[3:] + '(을)를 ' + str(sheet["H" + "2"].value) + '에 전송했습니다.')
+            await client.send_message(client.get_channel(str(sheet["H" + "2"].value)), message.content[3:])
+            file.save('kic_bot.xlsx')
         
 
 client.run(TOKEN)
